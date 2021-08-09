@@ -17,11 +17,12 @@ const Subtitle = styled.span`
   text-align: center;
 `;
 
-const Section = ({ title, subtitle }) => {
+const Section = ({ title, subtitle, id, children }) => {
   return (
-    <Container>
+    <Container id={id}>
       <Title>{title}</Title>
       <Subtitle>{subtitle}</Subtitle>
+      {children}
     </Container>
   );
 };
