@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import Section from "../../pages/Section";
 import { Container } from "../../pages/Container";
@@ -52,11 +51,6 @@ const AboutButtonContainer = styled.div`
   justify-content: center;
 `;
 
-const AboutButton = styled(Button)`
-  display: inline-flex;
-  align-items: center;
-`;
-
 const About = () => {
   return (
     <Section title="About Me" subtitle="My introduction" id="about">
@@ -88,10 +82,9 @@ const About = () => {
             </div>
           </Info>
           <AboutButtonContainer>
-            <AboutButton download="" href={CV}>
-              Download CV&nbsp;
-              <FontAwesomeIcon icon={faDownload} />
-            </AboutButton>
+            <Button download="" href={CV} flex={true} icon={faDownload}>
+              Download CV
+            </Button>
           </AboutButtonContainer>
         </Data>
       </AboutContainer>

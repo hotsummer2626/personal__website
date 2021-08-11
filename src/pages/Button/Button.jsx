@@ -1,6 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Button = styled.a`
+const Container = styled.a`
   display: inline-block;
   background-color: var(--first-color);
   color: #fff;
@@ -10,6 +11,60 @@ const Button = styled.a`
   &:hover {
     background-color: var(--first-color-alt);
   }
+
+  ${(props) =>
+    props.white
+      ? css`
+          background-color: #fff;
+          color: var(--first-color);
+          &:hover {
+            color: var(--first-color);
+          }
+        `
+      : css``}
+
+  ${(props) =>
+    props.flex
+      ? css`
+          display: inline-flex;
+          align-items: center;
+        `
+      : css``}
+  
+  ${(props) =>
+    props.small
+      ? css`
+          padding: 0.75rem 1rem;
+        `
+      : css``}
+
+  ${(props) =>
+    props.link
+      ? css`
+          padding: 0;
+          background-color: transparent;
+          color: var(--first-color);
+          &:hover {
+            background-color: transparent;
+            color: var(--first-color-alt);
+          }
+        `
+      : css``}
 `;
+
+export const ButtonIcon = styled(FontAwesomeIcon)`
+  font-size: ${(props) => props.iconsize || "1.25rem"};
+  margin-left: var(--mb-0-5);
+  transition: 0.3s;
+`;
+
+const Button = (props) => {
+  return (
+    <Container href={props.href} onClick={props.onClick} {...props}>
+      {props.children}
+      <ButtonIcon iconsize={props.iconsize} icon={props.icon} />
+    </Container>
+  );
+};
 
 export default Button;

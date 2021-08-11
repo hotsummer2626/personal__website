@@ -2,15 +2,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import NavItem from "./NavItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHome,
-  faUser,
-  faFileAlt,
-  faBriefcase,
-  faImage,
-  faEnvelope,
-  faTimes,
-} from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { navItemTable } from "../../../displayInformation";
 
 const Container = styled.div`
   @media (max-width: 767px) {
@@ -46,14 +39,6 @@ const NavClose = styled.div`
 
 export default class NavMenu extends Component {
   render() {
-    const navItemTable = [
-      { href: "home", text: "Home", icon: faHome },
-      { href: "about", text: "About", icon: faUser },
-      { href: "skills", text: "Skills", icon: faFileAlt },
-      { href: "services", text: "Services", icon: faBriefcase },
-      { href: "portfolio", text: "Portfolio", icon: faImage },
-      { href: "contact", text: "Contactme", icon: faEnvelope },
-    ];
     const { isNavMenuShow, handleIsNavMenuShowChange } = this.props;
     return (
       <Container isNavMenuShow={isNavMenuShow}>

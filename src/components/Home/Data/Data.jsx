@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../../pages/Button";
 
@@ -23,11 +22,6 @@ const Description = styled.p`
   margin-bottom: var(--mb-2);
 `;
 
-const DataButton = styled(Button)`
-  display: inline-flex;
-  align-items: center;
-`;
-
 const Data = () => {
   return (
     <Container>
@@ -37,10 +31,9 @@ const Data = () => {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo voluptatum
         provident li sunt quos, non cumque?
       </Description>
-      <DataButton href="#contact">
-        Contact Me&nbsp;
-        <FontAwesomeIcon icon={faEnvelope} />
-      </DataButton>
+      <Button href="#contact" flex={true} icon={faEnvelope}>
+        Contact Me
+      </Button>
     </Container>
   );
 };
