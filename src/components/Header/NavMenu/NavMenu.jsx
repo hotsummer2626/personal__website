@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import NavItem from "./NavItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import NavItem from "./NavItem";
 import { navItemTable } from "../../../displayInformation";
+import { mediaQueries } from "../../../mediaQueries";
 
 const Container = styled.div`
   @media (max-width: 767px) {
@@ -17,12 +18,29 @@ const Container = styled.div`
     border-radius: 1.5rem 1.5rem 0 0;
     transition: 0.3s;
   }
+
+  ${mediaQueries("xs")`
+    padding: 2rem .25rem 4rem;
+  `}
+
+  ${mediaQueries("md")`
+    margin-left: auto;
+  `}
 `;
 
 const NavList = styled.ul`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
+
+  ${mediaQueries("xs")`
+    column-gap: 0;
+  `}
+
+  ${mediaQueries("md")`
+    display: flex;
+    column-gap: 2rem;
+  `}
 `;
 
 const NavClose = styled.div`
@@ -35,11 +53,16 @@ const NavClose = styled.div`
   &:hover {
     color: var(--first-color-alt);
   }
+
+  ${mediaQueries("md")`
+    display: none;
+  `}
 `;
 
 export default class NavMenu extends Component {
   render() {
-    const { isNavMenuShow, handleIsNavMenuShowChange } = this.props;
+    const { isNavMenuShow, currentShowComponent, handleIsNavMenuShowChange } =
+      this.props;
     return (
       <Container isNavMenuShow={isNavMenuShow}>
         <NavList>
@@ -48,6 +71,7 @@ export default class NavMenu extends Component {
               key={navItem.text}
               href={navItem.href}
               icon={navItem.icon}
+              currentShowComponent={currentShowComponent}
               handleIsNavMenuShowChange={handleIsNavMenuShowChange}
             >
               {navItem.text}

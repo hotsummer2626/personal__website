@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { mediaQueries } from "../../../../mediaQueries";
 
 const Container = styled.div`
   position: fixed;
@@ -35,6 +36,10 @@ const Content = styled.div`
   background-color: var(--container-color);
   padding: 1.5rem;
   border-radius: 0.5rem;
+
+  ${mediaQueries("md")`
+    width: 450px;
+  `}
 `;
 
 const Title = styled.h4`

@@ -6,11 +6,16 @@ import {
   faDribbble,
   faGithub,
 } from "@fortawesome/free-brands-svg-icons";
+import { mediaQueries } from "../../../mediaQueries";
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: max-content;
   row-gap: 1rem;
+
+  ${mediaQueries("md")`
+    transform: translateX(-6rem);
+  `}
 `;
 
 const SocialIcon = styled.a`

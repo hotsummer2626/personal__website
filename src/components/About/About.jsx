@@ -6,10 +6,19 @@ import { Container } from "../../pages/Container";
 import Button from "../../pages/Button";
 import PROFILE_PHOTO from "../../assets/images/profile_photo.jpeg";
 import CV from "../../assets/pdf/Alexa-Cv.pdf";
+import { mediaQueries } from "../../mediaQueries";
 
 const AboutContainer = styled(Container)`
   display: grid;
   gap: 1.5rem;
+
+  ${mediaQueries("sm")`
+    grid-template-columns: repeat(2,1fr);
+  `}
+
+  ${mediaQueries("md")`
+    column-gap: 5rem;
+  `}
 `;
 
 const Img = styled.img`
@@ -24,12 +33,20 @@ const Data = styled.div``;
 const Description = styled.p`
   text-align: center;
   margin-bottom: var(--mb-2-5);
+
+  ${mediaQueries("md")`
+    text-align: initial;
+  `}
 `;
 
 const Info = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin-bottom: var(--mb-2-5);
+
+  ${mediaQueries("md")`
+    justify-content: space-between;
+  `}
 `;
 
 const InfoTitle = styled.span`
@@ -49,11 +66,15 @@ const InfoName = styled.span`
 const AboutButtonContainer = styled.div`
   display: flex;
   justify-content: center;
+
+  ${mediaQueries("md")`
+    justify-content: initial;
+  `}
 `;
 
-const About = () => {
+const About = React.forwardRef((props, ref) => {
   return (
-    <Section title="About Me" subtitle="My introduction" id="about">
+    <Section title="About Me" subtitle="My introduction" id="about" ref={ref}>
       <AboutContainer>
         <Img src={PROFILE_PHOTO} />
         <Data>
@@ -90,6 +111,6 @@ const About = () => {
       </AboutContainer>
     </Section>
   );
-};
+});
 
 export default About;

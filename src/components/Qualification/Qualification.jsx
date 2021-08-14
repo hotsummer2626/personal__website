@@ -1,19 +1,20 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faGraduationCap,
-  faBriefcase,
-} from "@fortawesome/free-solid-svg-icons";
 import Section from "../../pages/Section";
 import { Container } from "../../pages/Container";
-import EducationContent from "./EducationContent";
-import WorkContent from "./WorkContent";
+import Content from "./Content";
+import { qualificationsTable } from "../../displayInformation";
+import { mediaQueries } from "../../mediaQueries";
 
 const Tabs = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin-bottom: var(--mb-2);
+
+  ${mediaQueries("md")`
+    justify-content: center;
+  `}
 `;
 
 const QualificationButton = styled.div`
@@ -28,6 +29,22 @@ const QualificationButton = styled.div`
   &:hover {
     color: var(--first-color);
   }
+
+  ${mediaQueries("md")`
+    margin: 0 var(--mb-1);
+  `}
+`;
+
+const ContentContainer = styled.div`
+  ${mediaQueries("sm")`
+    display: grid;
+    grid-template-columns: .6fr;
+    justify-content: center;
+  `}
+
+  ${mediaQueries("md")`
+    grid-template-columns: 0.5fr;
+  `}
 `;
 
 export default class Qualification extends Component {
@@ -40,10 +57,6 @@ export default class Qualification extends Component {
   };
 
   render() {
-    const qualificationsTable = [
-      { type: "Education", icon: faGraduationCap },
-      { type: "Work", icon: faBriefcase },
-    ];
     const { currentShowQualification } = this.state;
     return (
       <Section title="Qualification" subtitle="My personal journey" id="">
@@ -63,15 +76,15 @@ export default class Qualification extends Component {
               </QualificationButton>
             ))}
           </Tabs>
-
-          <EducationContent
-            qulificationType={qualificationsTable[0].type}
-            currentShowQualification={currentShowQualification}
-          />
-          <WorkContent
-            qulificationType={qualificationsTable[1].type}
-            currentShowQualification={currentShowQualification}
-          />
+          <ContentContainer>
+            {qualificationsTable.map((qualification) => (
+              <Content
+                key={qualification.type}
+                qualification={qualification}
+                currentShowQualification={currentShowQualification}
+              />
+            ))}
+          </ContentContainer>
         </Container>
       </Section>
     );

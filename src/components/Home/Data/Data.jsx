@@ -2,9 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../../pages/Button";
+import {mediaQueries} from '../../../mediaQueries'
 
 const Container = styled.div`
   grid-column: 1/3;
+
+  ${mediaQueries('sm')`
+    grid-column: initial;
+  `}
 `;
 
 const Title = styled.h1`

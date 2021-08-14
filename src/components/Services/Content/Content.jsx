@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBorderAll, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Button, { ButtonIcon } from "../../../pages/Button";
 import Modal from "./Modal";
+import { mediaQueries } from "../../../mediaQueries";
 
 const Container = styled.div`
   position: relative;
@@ -15,6 +16,10 @@ const Container = styled.div`
   &:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
+
+  ${mediaQueries("md")`
+    padding: 6rem 0 2rem 2.5rem;
+  `}
 `;
 
 const ServicesIcon = styled(FontAwesomeIcon)`
@@ -22,6 +27,10 @@ const ServicesIcon = styled(FontAwesomeIcon)`
   font-size: 1.5rem;
   color: var(--first-color);
   margin-bottom: var(--mb-1);
+
+  ${mediaQueries("md")`
+    font-size: 2rem;
+  `}
 `;
 
 const Title = styled.h3`

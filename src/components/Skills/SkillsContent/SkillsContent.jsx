@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import SkillsList from "./SkillsList";
+import { mediaQueries } from "../../../mediaQueries";
 
 const Container = styled.div``;
 
@@ -13,20 +14,25 @@ const Header = styled.div`
   cursor: pointer;
 `;
 
-const SkillsIcon = styled.div`
+const SkillsIcon = styled(FontAwesomeIcon)`
   font-size: 2rem;
   color: var(--first-color);
   margin-right: var(--mb-0-75);
 `;
 
-const Title = styled.h1``;
+const Title = styled.h1`
+  ${mediaQueries("sm")`
+    font-size: var(--h3-font-size);
+  `}
+`;
 const Subtitle = styled.span``;
-const SkillsArrow = styled.div`
+
+const SkillsArrowIcon = styled(FontAwesomeIcon)`
   font-size: 2rem;
   color: var(--first-color);
   margin-left: auto;
-  transform: ${({ skillTitle, currentShowSkill }) => {
-    const rotateDegree = currentShowSkill === skillTitle ? "-180" : "0";
+  transform: ${({ skilltitle, currentshowskill }) => {
+    const rotateDegree = currentshowskill === skilltitle ? "-180" : "0";
     return `rotate(${rotateDegree}deg)`;
   }};
   transition: 0.4s;
@@ -44,19 +50,18 @@ const SkillsContent = ({
           handleCurrentShowSkillChange(skill.title);
         }}
       >
-        <SkillsIcon>
-          <FontAwesomeIcon color="var(--first-color)" icon={skill.icon} />
-        </SkillsIcon>
+        <SkillsIcon icon={skill.icon} />
+
         <div>
           <Title>{skill.title}</Title>
           <Subtitle>{skill.subtitle}</Subtitle>
         </div>
-        <SkillsArrow
-          skillTitle={skill.title}
-          currentShowSkill={currentShowSkill}
-        >
-          <FontAwesomeIcon color="var(--first-color)" icon={faAngleDown} />
-        </SkillsArrow>
+
+        <SkillsArrowIcon
+          icon={faAngleDown}
+          skilltitle={skill.title}
+          currentshowskill={currentShowSkill}
+        />
       </Header>
 
       {skill.skillsList.map((skillItem) => (

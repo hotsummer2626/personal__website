@@ -9,6 +9,7 @@ import Section from "../../pages/Section";
 import { Container } from "../../pages/Container";
 import { portfolioContentTable } from "../../displayInformation";
 import Content from "./Content";
+import { mediaQueries } from "../../mediaQueries";
 
 const PortfolioContainer = styled(Container)`
   display: grid;
@@ -20,30 +21,53 @@ const PortfolioContainer = styled(Container)`
 const SwiperWrapper = styled.div`
   display: flex;
   width: max-content;
-
   transform: ${({ currentShowContentIndex: index }) =>
-    `translateX(calc(${index - 1} * (4rem - 100vw)))`};
+    `translateX(calc(${index - 1} * (2.5rem - 100vw)))`};
   transition: 0.3s;
+
+  @media (min-width: 576px) {
+    transform: ${({ currentShowContentIndex: index }) =>
+      `translateX(calc(${index - 1} * (3.5rem - 100vw)))`};
+  }
+
+  @media (min-width: 768px) {
+    transform: ${({ currentShowContentIndex: index }) =>
+      `translateX(calc(${index - 1} * (-768px)))`};
+  }
 `;
 
 const SwiperArrowLeft = styled(FontAwesomeIcon)`
   cursor: pointer;
   position: absolute;
   top: 50%;
-  left: 1.5rem;
+  left: 0;
+  font-size: 2rem;
 `;
 
 const SwiperArrowRight = styled(FontAwesomeIcon)`
   cursor: pointer;
   position: absolute;
   top: 50%;
-  right: 1.5rem;
+  right: 0;
+  font-size: 2rem;
 `;
 
 const SwiperDotsContainer = styled.div`
-  width: calc(100vw - 4rem);
+  width: calc(100vw - 2.5rem);
   display: flex;
   justify-content: center;
+
+  ${mediaQueries("sm")`
+    width: calc(100vw - 3.5rem);
+  `}
+
+  ${mediaQueries("md")`
+    width: 768px;
+  `}
+
+  ${mediaQueries("lg")`
+    margin-top: 3rem;
+  `}
 `;
 
 const SwiperDot = styled.div`
@@ -56,7 +80,7 @@ const SwiperDot = styled.div`
     currentShowContentIndex === index ? "var(--first-color)" : "gray"};
 `;
 
-export default class Portfolio extends Component {
+class PortfolioComponent extends Component {
   state = { currentShowContentIndex: 1 };
 
   handleCurrentShowContentIndexChange = (index) => {
@@ -92,7 +116,12 @@ export default class Portfolio extends Component {
     };
 
     return (
-      <Section title="Portfolio" subtitle="Most rencet work" id="portfolio">
+      <Section
+        title="Portfolio"
+        subtitle="Most rencet work"
+        id="portfolio"
+        ref={this.props.forwardRef}
+      >
         <PortfolioContainer>
           <SwiperWrapper
             currentShowContentIndex={this.state.currentShowContentIndex}
@@ -101,6 +130,7 @@ export default class Portfolio extends Component {
               <Content key={portfolio.title} {...portfolio} />
             ))}
           </SwiperWrapper>
+
           <SwiperArrowLeft
             icon={faChevronLeft}
             onClick={() => {
@@ -113,6 +143,7 @@ export default class Portfolio extends Component {
               this.handleCurrentShowContentIndexChange("right");
             }}
           />
+
           <SwiperDotsContainer>
             {buildSwiperDotsArr(portfolioContentTable).map((index) => (
               <SwiperDot
@@ -130,3 +161,9 @@ export default class Portfolio extends Component {
     );
   }
 }
+
+const Portfolio = React.forwardRef((props, ref) => {
+  return <PortfolioComponent forwardRef={ref} />;
+});
+
+export default Portfolio;

@@ -54,7 +54,7 @@ const Container = styled.a`
 
 export const ButtonIcon = styled(FontAwesomeIcon)`
   font-size: ${(props) => props.iconsize || "1.25rem"};
-  margin-left: var(--mb-0-5);
+  margin-left: ${({ children }) => (children ? "var(--mb-0-5)" : "")};
   transition: 0.3s;
 `;
 
@@ -62,7 +62,11 @@ const Button = (props) => {
   return (
     <Container href={props.href} onClick={props.onClick} {...props}>
       {props.children}
-      <ButtonIcon iconsize={props.iconsize} icon={props.icon} />
+      <ButtonIcon
+        icon={props.icon}
+        iconsize={props.iconsize}
+        children={props.children}
+      />
     </Container>
   );
 };

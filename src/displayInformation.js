@@ -7,6 +7,9 @@ import {
   faEnvelope,
   faCode,
   faServer,
+  faPhone,
+  faMapMarkerAlt,
+  faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
 import PORTFOLIO_ONE from "./assets/images/portfolio1.jpg";
 import PORTFOLIO_TWO from "./assets/images/portfolio2.jpg";
@@ -46,6 +49,46 @@ export const skillsTable = [
   },
 ];
 
+export const qualificationsTable = [
+  {
+    type: "Education",
+    icon: faGraduationCap,
+    details: [
+      {
+        title: "Computer Enginner",
+        subtitle: "Peru - University",
+        calendar: "2009-2014",
+      },
+      {
+        title: "Web Design",
+        subtitle: "Spain - Institute",
+        calendar: "2014 -2017",
+      },
+      {
+        title: "Web Development",
+        subtitle: "Peru - Institute",
+        calendar: "2017 - 2019",
+      },
+    ],
+  },
+  {
+    type: "Work",
+    icon: faBriefcase,
+    details: [
+      {
+        title: "Computer Enginner",
+        subtitle: "Peru - University",
+        calendar: "2009-2014",
+      },
+      {
+        title: "Web Design",
+        subtitle: "Spain - Institute",
+        calendar: "2014 -2017",
+      },
+    ],
+  },
+];
+
 export const portfolioContentTable = [
   {
     img: PORTFOLIO_ONE,
@@ -65,4 +108,10 @@ export const portfolioContentTable = [
     description: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
   Dolore blanditiis nostrum modion ut quaerat?`,
   },
+];
+
+export const contactInformationTable = [
+  { icon: faPhone, title: "Call Me", subtitle: "999-777-666" },
+  { icon: faEnvelope, title: "Email", subtitle: "999@gmail.com" },
+  { icon: faMapMarkerAlt, title: "Location", subtitle: "China" },
 ];
