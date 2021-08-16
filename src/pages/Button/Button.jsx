@@ -63,11 +63,16 @@ const Button = (props) => {
   return (
     <Container href={props.href} onClick={props.onClick} {...props}>
       {props.children}
-      <ButtonIcon
-        icon={props.icon}
-        iconsize={props.iconsize}
-        children={props.children}
-      />
+
+      {props.icon ? (
+        <ButtonIcon
+          icon={props.icon}
+          iconsize={props.iconsize}
+          children={props.children}
+        />
+      ) : (
+        ""
+      )}
     </Container>
   );
 };

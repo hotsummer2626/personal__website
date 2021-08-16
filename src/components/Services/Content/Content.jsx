@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBorderAll, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBorderAll,
+  faArrowRight,
+  faCheckCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import Button, { ButtonIcon } from "../../../pages/Button";
-import Modal from "./Modal";
+import Modal from "../../../pages/Modal";
 import { mediaQueries } from "../../../mediaQueries";
 
 const Container = styled.div`
@@ -48,12 +52,34 @@ const ServiceButton = styled(Button)`
   }
 `;
 
+const ModalTitle = styled.h4`
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-medium);
+  margin-bottom: var(--mb-1-5);
+`;
+
+const Services = styled.ul`
+  display: grid;
+  row-gap: 1rem;
+`;
+
+const Service = styled.li`
+  display: flex;
+  align-items: center;
+`;
+
+const Description = styled.p``;
+
+const ModalIcon = styled(FontAwesomeIcon)`
+  color: var(--first-color);
+  margin-right: var(--mb-0-25);
+`;
+
 export default class Content extends Component {
   state = { isModalShow: false };
 
   handleIsModalShowChange = () => {
-    const { isModalShow } = this.state;
-    this.setState({ isModalShow: !isModalShow });
+    this.setState((state) => ({ isModalShow: !state.isModalShow }));
   };
 
   render() {
@@ -80,7 +106,30 @@ export default class Content extends Component {
         <Modal
           isModalShow={this.state.isModalShow}
           handleIsModalShowChange={this.handleIsModalShowChange}
-        />
+        >
+          <ModalTitle>
+            Ui/Ux <br /> Designer
+          </ModalTitle>
+
+          <Services>
+            <Service>
+              <ModalIcon icon={faCheckCircle} />
+              <Description>I develop the user interface</Description>
+            </Service>
+            <Service>
+              <ModalIcon icon={faCheckCircle} />
+              <Description>I develop the user interface</Description>
+            </Service>
+            <Service>
+              <ModalIcon icon={faCheckCircle} />
+              <Description>I develop the user interface</Description>
+            </Service>
+            <Service>
+              <ModalIcon icon={faCheckCircle} />
+              <Description>I develop the user interface</Description>
+            </Service>
+          </Services>
+        </Modal>
       </Container>
     );
   }

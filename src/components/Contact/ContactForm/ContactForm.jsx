@@ -5,6 +5,9 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../../pages/Button";
 import { mediaQueries } from "../../../mediaQueries";
 import validate from "./validate";
+import Modal from "../../../pages/Modal";
+import Loading from "./Loading";
+import Content from "./Content";
 
 const Container = styled.form`
   display: grid;
@@ -77,6 +80,9 @@ class ContactForm extends React.Component {
     },
 
     isFormSubmit: false,
+    isModalShow: false,
+    isLoading: false,
+    isFormSubmitSuccess: false,
   };
 
   handleDataChange = (e) => {
@@ -86,8 +92,12 @@ class ContactForm extends React.Component {
     });
   };
 
-  handleIsFormSubmit = () => {
+  handleIsFormSubmitChange = () => {
     this.setState({ isFormSubmit: true });
+  };
+
+  handleIsModalShowChange = () => {
+    this.setState((state) => ({ isModalShow: !state.isModalShow }));
   };
 
   getError = (data) => {
@@ -108,10 +118,17 @@ class ContactForm extends React.Component {
     return Object.keys(error).length > 0;
   };
 
+  successWorkFlow = () => {
+    this.handleIsModalShowChange();
+    this.setState({ isLoading: true });
+  };
+
   sendEmail = (e) => {
     e.preventDefault();
 
     if (this.hasError()) return;
+
+    this.successWorkFlow();
 
     emailjs
       .sendForm(
@@ -120,18 +137,19 @@ class ContactForm extends React.Component {
         e.target,
         "user_eFpNP7nuBn5Faqq9pW4D1"
       )
-      .then(
-        (result) => {
-          console.log(result);
-        },
-        (error) => {
-          console.log(error);
+      .then((result) => {
+        if (result) {
+          this.setState({ isFormSubmitSuccess: true, isLoading: false });
         }
-      );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   render() {
-    const { data, isFormSubmit } = this.state;
+    const { data, isFormSubmit, isModalShow, isLoading, isFormSubmitSuccess } =
+      this.state;
     const error = this.getError(data);
 
     return (
@@ -195,11 +213,25 @@ class ContactForm extends React.Component {
           <Button
             flex={true}
             icon={faEnvelope}
-            onClick={this.handleIsFormSubmit}
+            onClick={this.handleIsFormSubmitChange}
           >
             Send Message
           </Button>
         </ButtonWrapper>
+
+        <Modal
+          isModalShow={isModalShow}
+          handleIsModalShowChange={this.handleIsModalShowChange}
+        >
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <Content
+              isFormSubmitSuccess={isFormSubmitSuccess}
+              handleIsModalShowChange={this.handleIsModalShowChange}
+            />
+          )}
+        </Modal>
       </Container>
     );
   }
