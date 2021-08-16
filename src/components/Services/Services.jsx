@@ -32,6 +32,7 @@ class ServicesComponent extends Component {
         <ServicesContainer>
           <Content />
           <Content />
+          <Content />
         </ServicesContainer>
       </Section>
     );

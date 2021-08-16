@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Container = styled.a`
+  cursor: pointer;
   display: inline-block;
   background-color: var(--first-color);
   color: #fff;

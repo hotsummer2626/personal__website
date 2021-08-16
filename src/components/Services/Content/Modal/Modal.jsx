@@ -16,8 +16,6 @@ const Container = styled.div`
   justify-content: center;
   padding: 0 1rem;
   z-index: var(--z-modal);
-  opacity: 1;
-  visibility: visible;
   transition: 0.3s;
   ${({ isModalShow }) =>
     isModalShow
